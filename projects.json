@@ -1,0 +1,267 @@
+{
+    "colours": {
+        "stalled": "orange",
+        "failed": "red",
+        "abandoned": "red",
+        "in progress": "blue",
+        "completed": "green",
+        "available": "black",
+        "missing deps": "gray",
+        "default": "black"
+    },
+    "nodes": {
+        "hydroponics": {
+            "status": "default",
+            "deps": [
+                "sensors"
+            ]
+        },
+        "sensors": {
+            "status": "default",
+            "deps": []
+        },
+        "air filters": {
+            "status": "default",
+            "deps": [
+                "hydroponics"
+            ]
+        },
+        "Multi wall chromance-esque with digital clock (with date and seconds)": {
+            "status": "default",
+            "notes": "https://discord.com/channels/863855235072262175/870345504247132250/870347814000033902",
+            "deps": [
+                "Ntp server with gps module"
+            ]
+        },
+        "Ntp server with gps module": {
+            "status": "default",
+            "deps": []
+        },
+        "vr setup\\+": {
+            "status": "default",
+            "deps": [
+                "emg thing",
+                "vr setup"
+            ]
+        },
+        "vr setup": {
+            "status": "default",
+            "deps": [
+                "room"
+            ]
+        },
+        "learn blender\\+unity": {
+            "status": "default",
+            "deps": []
+        },
+        "make vrc skin": {
+            "status": "default",
+            "deps": [
+                "vr setup\\+",
+                "learn blender\\+unity"
+            ]
+        },
+        "emg thing": {
+            "status": "default",
+            "deps": []
+        },
+        "modded prosthetic": {
+            "status": "default",
+            "deps": [
+                "emg thing"
+            ]
+        },
+        "room": {
+            "status": "in progress",
+            "deps": []
+        },
+        "led strip lighting": {
+            "status": "default",
+            "deps": [
+                "room"
+            ]
+        },
+        "audio mixer": {
+            "status": "default",
+            "deps": [
+                "room"
+            ]
+        },
+        "arcade cabinet": {
+            "status": "in progress",
+            "deps": [
+                "room"
+            ]
+        },
+        "physical network switch": {
+            "status": "default",
+            "deps": [
+                "arcade cabinet"
+            ]
+        },
+        "storage server": {
+            "notes": "(couple of cm4s connected to as many 3.5\\\" hdds as possible)",
+            "status": "default",
+            "deps": [
+                "physical network switch"
+            ]
+        },
+        "tape drive": {
+            "notes": "",
+            "status": "default",
+            "deps": [
+                "physical network switch"
+            ]
+        },
+        "archival project": {
+            "notes": "https://discord.com/channels/863855235072262175/870345504247132250/938185995042558073",
+            "status": "default",
+            "deps": [
+                "storage server"
+            ]
+        },
+        "hacked/custom router": {
+            "status": "default",
+            "deps": [
+                "physical network switch"
+            ]
+        },
+        "rpi cluster": {
+            "status": "default",
+            "deps": [
+                "physical network switch"
+            ]
+        },
+        "fpga extension for cluster": {
+            "status": "default",
+            "deps": [
+                "rpi cluster"
+            ]
+        },
+        "f@h/monero on pi cluster": {
+            "status": "default",
+            "deps": [
+                "rpi cluster"
+            ]
+        },
+
+        "server": {
+            "notes": "needs rack, 2.5\\\" bracket",
+            "status": "in progress",
+            "deps": [
+                "arcade cabinet",
+                "laptop"
+            ]
+        },
+        "ipv4 address space mapper": {
+            "notes": "https://youtu.be/JcJSW7Rprio",
+            "status": "default",
+            "deps": [
+                "server"
+            ]
+        },
+        "sigbovik autofetch/RSS": {
+            "status": "default",
+            "deps": [
+                "server"
+            ]
+        },
+        "nas": {
+            "notes": "need another 2tb drive",
+            "status": "default",
+            "deps": [
+                "server"
+            ]
+        },
+        "git server": {
+            "status": "default",
+            "deps": [
+                "nas"
+            ]
+        },
+        "thing that plays random track from folder on nas": {
+            "status": "default",
+            "deps": [
+                "nas"
+            ]
+        },
+        "microphone array": {
+            "status": "default",
+            "deps": [
+                "noise treatment for server"
+            ]
+        },
+        "noise treatment for server": {
+            "status": "default",
+            "deps": [
+                "server"
+            ]
+        },
+        "voice controlled thing": {
+            "status": "default",
+            "deps": [
+                "server"
+            ]
+        },
+        "kinect full body tracking": {
+            "notes": "",
+            "status": "default",
+            "deps": [
+                "server"
+            ]
+        },
+
+        "laptop": {
+            "status": "in progress",
+            "deps": []
+        },
+        "gpio module for laptop": {
+            "status": "default",
+            "deps": [
+                "laptop"
+            ],
+            "notes": "https://discord.com/channels/863855235072262175/870345504247132250/959051751246401578"
+        },
+        "digitiser": {
+            "status": "default",
+            "deps": [
+                "laptop"
+            ],
+            "notes": "maybe take from \\\"for parts\\\" surface from ebay?"
+        },
+        "normal keeb": {
+            "status": "in progress",
+            "deps": []
+        },
+        "ortho keeb": {
+            "status": "default",
+            "deps": [
+                "normal keeb"
+            ]
+        },
+        "mirage": {
+            "status": "default",
+            "deps": [
+                "normal keeb"
+            ]
+        },
+        "charachorder": {
+            "status": "default",
+            "deps": [
+                "normal keeb"
+            ]
+        },
+        "left handed keyboard": {
+            "status": "default",
+            "deps": [
+                "normal keeb"
+            ]
+        },
+        "other split board": {
+            "status": "default",
+            "deps": [
+                "normal keeb"
+            ]
+        }
+    }
+}
