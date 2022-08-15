@@ -2,7 +2,7 @@
 
 A custom project organizer with dependency checking.
 
-This project was started by a friend (@Olliroxx), but I decided to take it from
+This project was started by a friend (@GenericNerdyUsername), but I decided to take it from
 their list (since they already had plenty of unfinished projects). The
 `projects.json` file, which currently contains an example project tree, has been
 preserved from their version, but the source code has been rebuilt from scratch.
