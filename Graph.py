@@ -46,6 +46,7 @@ class Graph:
         _source = self.find_node(source)
         _dest = self.find_node(dest)
         _source.dependencies.add(_dest)
+        _dest.dependants.add(_source)
 
     # TODO: Add code to remove connections
 
