@@ -1,4 +1,4 @@
-# ProjectOrganizer v0.0.1
+# ProjectOrganizer v0.1.0
 
 A custom project organizer with dependency checking.
 
@@ -12,7 +12,7 @@ preserved from their version, but the source code has been rebuilt from scratch.
 v0.1.0 (Initial test):
 - [x] Import a graph from a JSON file
 - [x] Positioner type: Random object placement
-- [ ] Draw a graph to a PyGame window
+- [x] Draw a graph to a PyGame window
 
 v0.2.0 (Functionality):
 - [ ] Positioner type: Dependency tiers
