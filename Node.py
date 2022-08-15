@@ -11,6 +11,9 @@ class Node:
         self.dependants = set()  # Nodes with 'self' as a dependency
         self.position_x = 0
         self.position_y = 0  # Coordinates range from 0 to 1!
+        # TODO: Calculate node size instead of hard-coding it
+        self.width = 48
+        self.height = 24
 
     def __repr__(self):
         return "Node.Node(name={}, description={}, status={}, dependencies={}, position_x={}, position_y={})".format(

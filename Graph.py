@@ -1,14 +1,18 @@
 from __future__ import annotations
 from typing import TextIO
 
-import json
-
 from Node import Node
+
+import json
 
 
 class Graph:
 
+    # TODO: make node list support arbitrarily many dimensions, to better organize node pointers.
+    # This will be helpful when more advanced positioners are added.
     nodes: list[Node] = []
+
+    # TODO: Store non-node data from init file (Keep original JSON dict, but discard node data?)
 
     def __init__(self, file: str | TextIO = None):
         if file:
