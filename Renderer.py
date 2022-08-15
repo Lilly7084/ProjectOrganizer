@@ -14,7 +14,9 @@ class Renderer:
         self.surface = pygame.Surface((width, height))
         self.surface.fill((255, 255, 255))
 
-    def render(self, graph: Graph):
+    def render(self, graph: Graph) -> None:
+        """Draws a graph to the renderer's surface object.
+        Call this function once, then blit it to the window surface every frame."""
 
         # Draw connections
         for node1 in graph.nodes:
@@ -28,16 +30,4 @@ class Renderer:
 
         # Draw nodes
         for node in graph.nodes:
-            # TODO: Clean up node drawing code (move to node class?)
-
-            # Find bounding box
-            pos_x = node.position_x - node.width / 2
-            pos_y = node.position_y - node.height / 2
-            bounding_box = pygame.Rect(pos_x, pos_y, node.width, node.height)
-
-            # Draw node outline
-            ring_color = (0, 0, 0)
-            pygame.draw.ellipse(self.surface, (255, 255, 255), bounding_box, 0)
-            pygame.draw.ellipse(self.surface, ring_color, bounding_box, self.node_thickness)
-
-            # TODO: Draw node's text
+            node.draw(self.surface, self.node_thickness)

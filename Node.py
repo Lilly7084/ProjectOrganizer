@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pygame
+
 
 class Node:
 
@@ -15,8 +17,25 @@ class Node:
         self.width = 48
         self.height = 24
 
+    def draw(self, surface: pygame.Surface, node_thickness: int = 1):
+        """Draws the node to a PyGame surface object"""
+
+        # Find bounding box
+        pos_x = self.position_x - self.width / 2
+        pos_y = self.position_y - self.height / 2
+        bounding_box = pygame.Rect(pos_x, pos_y, self.width, self.height)
+
+        # Draw node outline
+        ring_color = (0, 0, 0)
+        pygame.draw.ellipse(surface, (255, 255, 255), bounding_box, 0)
+        pygame.draw.ellipse(surface, ring_color, bounding_box, node_thickness)
+
+        # TODO: Draw node's text
+
     def __repr__(self):
-        return "Node.Node(name={}, description={}, status={}, dependencies={}, position_x={}, position_y={})".format(
+        pos_data = "position_x={}, position_y={}, width={}, height={}".format(
+                self.position_x, self.position_y, self.width, self.height)
+        return "Node.Node(name={}, description={}, status={}, dependencies={}, {})".format(
             self.name.__repr__(), self.description.__repr__(), self.status.__repr__(),
-            self.dependencies, self.position_x.__repr__(), self.position_y.__repr__()
+            self.dependencies, pos_data
         )
