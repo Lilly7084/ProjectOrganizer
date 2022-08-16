@@ -25,6 +25,9 @@ def main():
     screen = pygame.display.set_mode(size)
     clock = pygame.time.Clock()
 
+    # Save a PNG
+    r.export('./test.png')
+
     # Show graph
     while True:
         screen.fill((255, 255, 255))

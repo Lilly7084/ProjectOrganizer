@@ -31,3 +31,14 @@ class Renderer:
         # Draw nodes
         for node in graph.nodes:
             node.draw(self.surface, self.node_thickness)
+
+    def show(self, surface: pygame.Surface) -> None:
+        """Blit the renderer surface onto another surface"""
+        surface.blit(self.surface, (0, 0))
+
+    def export(self, file_path: str) -> None:
+        """Save the contents of the renderer surface to an image"""
+        # TODO: Name hint 'jpg' might be expected to be 'jpeg'
+        name_hint = file_path.split('.')[-1]
+        with open(file_path, 'wb') as file_ptr:
+            pygame.image.save(self.surface, file_ptr, name_hint)

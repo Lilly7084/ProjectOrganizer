@@ -15,10 +15,10 @@ v0.1.0 (Initial test):
 - [x] Draw a graph to a PyGame window
 
 v0.2.0 (Functionality):
-- [ ] Positioner type: Dependency tiers
+- [x] Positioner type: Dependency tiers
 - [ ] Scroll preview window for larger graphs
 - [ ] Check projects for unsatisfied dependencies
-- [ ] Export graph to PNG image
+- [x] Export graph to PNG image
 
 v0.3.0 (Aesthetic):
 - [ ] Controllable node shape and text wrapping
