@@ -1,5 +1,5 @@
 from Graph import Graph
-from positioners.RandomPositioner import RandomPositioner
+from positioners.TieredPositioner import TieredPositioner
 from Renderer import Renderer
 
 import pygame
@@ -13,7 +13,7 @@ def main():
     g = Graph('./projects.json')
 
     # Set node positions
-    rp = RandomPositioner()
+    rp = TieredPositioner()
     rp.place_graph(g)
 
     # Render graph
