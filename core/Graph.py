@@ -68,8 +68,8 @@ class Graph:
 
         # Set up nodes
         for node_name, node in data.items():
-            description = node['description'] if 'description' in node else ''
-            status = node['status'] if 'status' in node else ''
+            description = node.get('description', '')
+            status = node.get('status', '')
             n = Node(name=node_name, description=description, status=status, font=font)
             self.add_node(n)
 

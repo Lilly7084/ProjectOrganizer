@@ -16,8 +16,9 @@ class Node:
         self.status = status  # Current status of this project
         # Links
         self.dependencies = set()  # Nodes which 'self' has as dependencies
+        # TODO: Do we really need to store dependant nodes?
         self.dependants = set()  # Nodes which have 'self' as a dependency
-        # Graphics data
+        # Pre-render text surface (Surface size used as node size)
         chars_per_line = 28
         self.text_surf = DrawingUtils.draw_text(name, chars_per_line, font, None, (0, 0))
         width, height = self.text_surf.get_size()
@@ -25,9 +26,9 @@ class Node:
         self.width = width + oversize
         self.height = height + oversize
         self.position_x = 0
-        self.position_y = 0  # Coordinates range from 0 to 1!
+        self.position_y = 0
 
-    def draw(self, surface: pygame.Surface, font: pygame.font.Font, node_thickness: int = 1):
+    def draw_node(self, surface: pygame.Surface, font: pygame.font.Font, node_thickness: int):
         """Draws the node to a PyGame surface object"""
 
         # Find bounding box

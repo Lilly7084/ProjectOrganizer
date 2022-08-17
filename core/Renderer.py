@@ -28,12 +28,12 @@ class Renderer:
                 point2 = (node2.position_x, node2.position_y)
 
                 # TODO: Clean up connection drawing code
-                line_color = (0, 0, 0)
-                pygame.draw.line(self.surface, line_color, point1, point2, self.line_thickness)
+                line_colour = (0, 0, 0)
+                pygame.draw.line(self.surface, line_colour, point1, point2, self.line_thickness)
 
         # Draw nodes
         for node in graph.nodes:
-            node.draw(self.surface, self.font, self.node_thickness)
+            node.draw_node(self.surface, self.font, self.node_thickness)
 
     def show(self, surface: pygame.Surface) -> None:
         """Blits the renderer surface onto another surface"""
