@@ -4,6 +4,8 @@ import pygame
 
 
 class Node:
+    """Stores all the information for a single node; name, description, status,
+    dependencies, dependants, position, size, etc."""
 
     def __init__(self, name: str = '', description: str = '', status: str = ''):
         self.name = name  # The project's name, shown in the render
@@ -31,6 +33,10 @@ class Node:
         pygame.draw.ellipse(surface, ring_color, bounding_box, node_thickness)
 
         # TODO: Draw node's text
+
+    def is_dependency_satisfied(self) -> bool:
+        """Check if all dependencies for this node have been completed"""
+        return all((dep.status == 'completed') for dep in self.dependencies)
 
     def __repr__(self):
         pos_data = "position_x={}, position_y={}, width={}, height={}".format(

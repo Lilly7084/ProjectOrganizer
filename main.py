@@ -13,11 +13,11 @@ def main():
     g = Graph('./projects.json')
 
     # Set node positions
-    rp = TieredPositioner()
-    rp.place_graph(g)
+    rp = TieredPositioner(spacing=64)
+    width, height = rp.place_graph(g)
 
     # Render graph
-    r = Renderer(width=640, height=480, line_thickness=1, node_thickness=1)
+    r = Renderer(width, height, line_thickness=1, node_thickness=1)
     r.render(g)
 
     # Create window

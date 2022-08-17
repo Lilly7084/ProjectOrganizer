@@ -1,12 +1,13 @@
 from __future__ import annotations
 from typing import TextIO
 
-from Node import Node
+from core.Node import Node
 
 import json
 
 
 class Graph:
+    """Stores a set of nodes, and a block of raw metadata (if loaded from a JSON file)"""
 
     nodes: list[Node] = []
     metadata: dict = {}
@@ -21,25 +22,30 @@ class Graph:
             else:
                 data = json.load(open(file, 'r', encoding='utf-8'))
 
-            # TODO: Move node init code to separate function?
-
-            # Set up nodes
-            for node_name, node in data['nodes'].items():
-                description = node['description'] if 'description' in node else ''
-                status = node['status'] if 'status' in node else ''
-                n = Node(name=node_name, description=description, status=status)
-                self.add_node(n)
-
-            # Set up connections
-            for source, node in data['nodes'].items():
-                deps_short = node['deps'] if 'deps' in node.keys() else []
-                deps_long = node['dependencies'] if 'dependencies' in node.keys() else []
-                for dest in (deps_short + deps_long):
-                    self.add_connection(source, dest)
-
-            # Save non-node information to metadata field
+            self.init_nodes(data['nodes'])
             self.metadata = data.copy()
             self.metadata.pop('nodes')
+
+    def init_nodes(self, data: dict) -> None:
+        """Set up node and connection data from a dict (loaded from project-list JSON file)"""
+
+        # Set up nodes
+        for node_name, node in data.items():
+            description = node['description'] if 'description' in node else ''
+            status = node['status'] if 'status' in node else ''
+            n = Node(name=node_name, description=description, status=status)
+            self.add_node(n)
+
+        # Check node dependencies
+        for node in self.nodes:
+            if not node.is_dependency_satisfied():
+                node.status = 'missing deps'
+
+        # Set up connections
+        for source, node in data.items():
+            deps = node.get('deps', []) + node.get('dependencies', [])
+            for dest in deps:
+                self.add_connection(source, dest)
 
     def add_node(self, node: Node) -> None:
         """Adds a node to the graph's node-list"""
@@ -76,7 +82,9 @@ class Graph:
             dest.dependants.remove(source)
 
     def find_node(self, node: str | Node) -> Node | None:
-        """Convenience function for managing nodes by name. Searches the node-list if the input is a name."""
+        """Convenience function for managing nodes by name.
+        Searches the node-list if the input is a string.
+        May return None if it can't find the requested node."""
         if node is Node:
             return node
         for n in self.nodes:

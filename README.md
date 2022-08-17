@@ -1,4 +1,4 @@
-# ProjectOrganizer v0.1.2
+# ProjectOrganizer v0.1.4
 
 A custom project organizer with dependency checking.
 
@@ -18,12 +18,12 @@ v0.2.0 (Functionality):
 - [x] Positioner type: Dependency tiers
 - [ ] Show text contents of nodes
 - [ ] Resize nodes to perfectly fit text
-- [ ] Scroll preview window for larger graphs
-- [ ] Check projects for unsatisfied dependencies
+- [x] Resize window to fit graph
+- [ ] Scroll preview window for large graphs
+- [x] Check projects for unsatisfied dependencies
 - [x] Export graph to PNG image
 
 v0.3.0 (Aesthetic):
-- [ ] Controllable node shape and text wrapping
 - [ ] Multiple node forms (ellipse, rectangle, ...)
 - [ ] Parse color information from JSON file
 - [ ] Show color code in rendered graphs
