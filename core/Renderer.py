@@ -1,4 +1,4 @@
-from Graph import Graph
+from core.Graph import Graph
 
 import pygame
 
@@ -16,7 +16,8 @@ class Renderer:
 
     def render(self, graph: Graph) -> None:
         """Draws a graph to the renderer's surface object.
-        Call this function once, then blit it to the window surface every frame."""
+        This function only needs to be called once, since the renderer has its own surface,
+        which can be blitted to the window surface once per frame."""
 
         # Draw connections
         for node1 in graph.nodes:
@@ -33,11 +34,11 @@ class Renderer:
             node.draw(self.surface, self.node_thickness)
 
     def show(self, surface: pygame.Surface) -> None:
-        """Blit the renderer surface onto another surface"""
+        """Blits the renderer surface onto another surface"""
         surface.blit(self.surface, (0, 0))
 
     def export(self, file_path: str) -> None:
-        """Save the contents of the renderer surface to an image"""
+        """Saves the contents of the renderer surface to an image"""
         # TODO: Name hint 'jpg' might be expected to be 'jpeg'
         name_hint = file_path.split('.')[-1]
         with open(file_path, 'wb') as file_ptr:

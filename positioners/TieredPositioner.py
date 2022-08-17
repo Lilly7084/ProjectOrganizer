@@ -1,9 +1,11 @@
-from Graph import Graph
-from Node import Node
+from core.Graph import Graph
+from core.Node import Node
 from positioners.Positioner import Positioner
 
 
 class TieredPositioner(Positioner):
+    """Organizes a graph into dependency layers, and positions its nodes so the layers are stacked.
+    'Dependency layers' are groups of nodes which depend only on the nodes in previous layers."""
 
     layers: list[list[Node]] = []
 
@@ -13,8 +15,7 @@ class TieredPositioner(Positioner):
 
     @staticmethod
     def sort_layers(nodes: list[Node]) -> list[list[Node]]:
-        """Organize a list of nodes into layers, such that
-        each layer depends only on the ones before it."""
+        """Organizes a list of nodes into dependency layers"""
         to_eval = nodes.copy()  # Copy to avoid concurrent modification issues
         layers = []
 
@@ -36,6 +37,7 @@ class TieredPositioner(Positioner):
 
     @staticmethod
     def place_layers(layers: list[list[Node]], width: int, height: int) -> None:
+        """Sets the node positions for a list of dependency layers"""
         spacing_y = height / len(layers)
         for (row, layer) in enumerate(layers):
             spacing_x = width / len(layer)

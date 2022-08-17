@@ -1,6 +1,6 @@
-from Graph import Graph
+from core.Graph import Graph
 from positioners.TieredPositioner import TieredPositioner
-from Renderer import Renderer
+from core.Renderer import Renderer
 
 import pygame
 import sys

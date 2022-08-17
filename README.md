@@ -1,4 +1,4 @@
-# ProjectOrganizer v0.1.0
+# ProjectOrganizer v0.1.2
 
 A custom project organizer with dependency checking.
 
@@ -16,6 +16,8 @@ v0.1.0 (Initial test):
 
 v0.2.0 (Functionality):
 - [x] Positioner type: Dependency tiers
+- [ ] Show text contents of nodes
+- [ ] Resize nodes to perfectly fit text
 - [ ] Scroll preview window for larger graphs
 - [ ] Check projects for unsatisfied dependencies
 - [x] Export graph to PNG image
@@ -63,12 +65,12 @@ can be whatever you want, but will default to:
 | completed       | Green  | Finished and functional, but may be revisited    |
 | available       | Black  | Not yet started                                  |
 | missing deps[1] | Gray   | Can't start due to missing dependencies          |
-| default         | Black  |                                                  |
+| default         | Black  | (No specific meaning)                            |
 
 [1] This tag is never assigned to an item. Rather, it's automatically assigned
     to any project with at least one unsatisfied (incomplete) dependency.
 
 ## How to run
 
-It's quite simple, just run `python main.py \<path\>`, providing a path to a
+It's quite simple, just run `python main.py <path>`, providing a path to a
 JSON file describing your current project list.
