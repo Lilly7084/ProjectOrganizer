@@ -1,4 +1,4 @@
-# ProjectOrganizer v0.1.4
+# ProjectOrganizer v0.1.7
 
 A custom project organizer with dependency checking.
 
@@ -6,6 +6,10 @@ This project was started by a friend (@GenericNerdyUsername), but I decided to t
 their list (since they already had plenty of unfinished projects). The
 `projects.json` file, which currently contains an example project tree, has been
 preserved from their version, but the source code has been rebuilt from scratch.
+
+Here's an example of what it's outputting right now:
+
+![](./test.png)
 
 ## To-do list
 
@@ -19,7 +23,7 @@ v0.2.0 (Functionality):
 - [x] Show text contents of nodes
 - [x] Resize nodes to perfectly fit text
 - [x] Resize window to fit graph
-- [ ] Fix node spacing (between edges instead of centers)
+- [x] Fix node spacing (between edges instead of centers)
 - [ ] Scroll preview window for large graphs
 - [x] Check projects for unsatisfied dependencies
 - [x] Export graph to PNG image
