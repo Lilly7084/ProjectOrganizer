@@ -30,7 +30,7 @@ v0.2.0 (Functionality):
 
 v0.3.0 (Aesthetic):
 - [x] Parse color information from JSON file
-- [ ] Show color code in rendered graphs
+- [x] Show color code in rendered graphs
 - [ ] Use cubic curves (Hermite spline?) for dependency lines
 - [ ] Add arrow heads to the ends of lines
 

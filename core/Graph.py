@@ -26,13 +26,13 @@ class Graph:
             else:
                 data = json.load(open(file, 'r', encoding='utf-8'))
 
-            self.init_nodes(data['nodes'], font)
             self.colours = {
                 key: parse_colour(value)
                 for key, value in data.get('colours', []).items()
             }
+            self.init_nodes(data['nodes'], font, self.colours)
 
-    def init_nodes(self, data: dict, font: pygame.font.Font) -> None:
+    def init_nodes(self, data: dict, font: pygame.font.Font, colours: dict[str, Colour]) -> None:
         """Set up node and connection data from a dict (loaded from project-list JSON file)"""
 
         # Set up nodes
@@ -40,19 +40,19 @@ class Graph:
             description = node.get('description', '')
             status = node.get('status', '')
             n = Node(node_name, description, status)
-            n.pre_render(font)
             self.add_node(n)
-
-        # Check node dependencies
-        for node in self.nodes:
-            if not node.is_dependency_satisfied():
-                node.status = 'missing deps'
 
         # Set up connections
         for source, node in data.items():
             deps = node.get('deps', []) + node.get('dependencies', [])
             for dest in deps:
                 self.add_connection(source, dest)
+
+        # Finish setting up nodes
+        for node in self.nodes:
+            if not node.is_dependency_satisfied():
+                node.status = 'missing deps'
+            node.pre_render(font, colours)
 
     def add_node(self, node: Node) -> None:
         """Adds a node to the graph's node-list"""

@@ -20,7 +20,7 @@ def main():
     width, height = rp.place_graph(g)
 
     # Render graph
-    r = Renderer(width, height, 1, 1, font)
+    r = Renderer(width, height, 1, 2, font)
     r.render(g)
 
     # Create window
