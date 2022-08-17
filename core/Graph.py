@@ -2,16 +2,17 @@ from __future__ import annotations
 from typing import TextIO
 
 from core.Node import Node
+from core.Colours import parse_colour
 
 import json
 import pygame
 
 
 class Graph:
-    """Stores a set of nodes, and a block of raw metadata (if loaded from a JSON file)"""
+    """Stores a set of nodes, and colour information (if loaded from a JSON file)"""
 
     nodes: list[Node] = []
-    metadata: dict = {}
+    colours: dict[str, tuple[float, float, float]] = {}
 
     def __init__(self, file: str | TextIO, font: pygame.font.Font):
         if file:
@@ -24,44 +25,10 @@ class Graph:
                 data = json.load(open(file, 'r', encoding='utf-8'))
 
             self.init_nodes(data['nodes'], font)
-            self.colours = self.parse_colours(data["colours"])
-            self.metadata = data.copy()
-            self.metadata.pop('nodes')
-
-    def parse_colours(self, colours: dict) -> dict:
-
-        out = {}
-        for key, value in colours.items():
-            out[key] = self.parse_colour(value)
-        return out
-
-    def parse_colour(self, colour: str) -> tuple:
-        if colour in pygame.colordict.THECOLORS:
-            return pygame.colordict.THECOLORS[colour]
-        elif colour.lower().startswith("rgb("):
-            return self.from_rgb(colour)
-        elif colour.lower().startswith("hsv("):
-            return self.from_hsv(colour)
-        elif len(colour) in (6, 7):
-            return self.from_hex(colour)
-
-    @staticmethod
-    def from_rgb(colour: str) -> tuple:
-        as_str = colour[4:-1].split(",")
-        return tuple(int(i) for i in as_str)
-
-    @staticmethod
-    def from_hsv(colour: str) -> tuple:
-        as_str = colour[4:-1].split(",")
-        temp = pygame.Color((0, 0, 0))
-        temp.hsva = [int(i) for i in as_str]
-        return temp[0:3]
-
-    @staticmethod
-    def from_hex(colour: str) -> tuple:
-        if len(colour) == 7:
-            colour = colour[1:]
-        return int(colour[0:2], 16), int(colour[2:4], 16), int(colour[4:6], 16)
+            self.colours = {
+                key: parse_colour(value)
+                for key, value in data.get('colours', []).items()
+            }
 
     def init_nodes(self, data: dict, font: pygame.font.Font) -> None:
         """Set up node and connection data from a dict (loaded from project-list JSON file)"""
@@ -70,7 +37,8 @@ class Graph:
         for node_name, node in data.items():
             description = node.get('description', '')
             status = node.get('status', '')
-            n = Node(name=node_name, description=description, status=status, font=font)
+            n = Node(node_name, description, status)
+            n.pre_render(font)
             self.add_node(n)
 
         # Check node dependencies

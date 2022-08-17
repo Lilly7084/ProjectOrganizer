@@ -33,7 +33,7 @@ class Renderer:
 
         # Draw nodes
         for node in graph.nodes:
-            node.draw_node(self.surface, self.font, self.node_thickness)
+            node.draw_node(self.surface, self.node_thickness)
 
     def show(self, surface: pygame.Surface) -> None:
         """Blits the renderer surface onto another surface"""
