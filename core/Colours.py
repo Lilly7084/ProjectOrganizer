@@ -1,34 +1,45 @@
 import pygame
+import re
 
 
-# TODO: Fix type-checking for colours
-Colour = tuple[float, float, float]
+Colour = tuple[int, int, int]
 
 
-def from_rgb(colour: str) -> tuple:
-    as_str = colour[4:-1].split(",")
-    return tuple(int(i) for i in as_str)
+def from_hex(code: int) -> Colour:
+    red = int((code >> 16) & 0xFF)
+    grn = int((code >> 8) & 0xFF)
+    blu = int(code & 0xFF)
+    return red, grn, blu
 
 
-def from_hsv(colour: str) -> tuple:
-    as_str = colour[4:-1].split(",")
-    temp = pygame.Color((0, 0, 0))
-    temp.hsva = [int(i) for i in as_str]
-    return temp[0:3]
+def from_rgb(red: int, grn: int, blu: int) -> Colour:
+    # Haha data-spitter-outer go brrrr
+    return red, grn, blu
 
 
-def from_hex(colour: str) -> tuple:
-    if len(colour) == 7:
-        colour = colour[1:]
-    return int(colour[0:2], 16), int(colour[2:4], 16), int(colour[4:6], 16)
+PARSERS = [
+    (r'#([0-9a-f]{6})', from_hex),
+    (r'rgb\((.*?)\)', from_rgb)
+]
 
 
-def parse_colour(colour: str) -> tuple:
+def parse_colour(colour: str) -> Colour:
+    """Attempt to convert a colour from a string to a `Colour` object.
+    Checks built-in color list (`pygame.colordict.THECOLORS`),
+    before trying all available converters/parsers.
+    If all fails, returns a default color (black)."""
+    colour = colour.strip().lower()  # Make input a bit more resilient
+    # Try the built-in color table
     if colour in pygame.colordict.THECOLORS:
         return pygame.colordict.THECOLORS[colour]
-    elif colour.lower().startswith("rgb("):
-        return from_rgb(colour)
-    elif colour.lower().startswith("hsv("):
-        return from_hsv(colour)
-    elif len(colour) in (6, 7):
-        return from_hex(colour)
+
+    # Try the converters/parsers
+    for (check, parse) in PARSERS:
+        match = re.match(check, colour)
+        if match:
+            vals = match.group(1).split(',')  # Split apart components
+            vals = map(lambda x: float(x.strip()), vals)  # Strip and parse
+            return parse(*vals)
+
+    # Failure condition: Still needs to return a color
+    return 0, 0, 0

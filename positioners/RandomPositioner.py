@@ -7,6 +7,9 @@ import random
 class RandomPositioner(Positioner):
     """Randomly positions nodes around the screen"""
 
+    width: int   # How large is the field to scatter nodes in? (X)
+    height: int  # How large is the field to scatter nodes in? (Y)
+
     def __init__(self, width: int = 640, height: int = 480):
         super().__init__()
         self.width = width

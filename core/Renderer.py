@@ -5,11 +5,14 @@ import pygame
 
 class Renderer:
 
+    surface: pygame.Surface  # The surface to render graphs onto
+    line_thickness: int      # How thick connections should be drawn
+    node_thickness: int      # How thick the node's rings should be drawn
+    font: pygame.font.Font   # The font used for node labels
+
     def __init__(self, width: int, height: int, line_thickness: int,
                  node_thickness: int, font: pygame.font.Font):
         pygame.init()
-        self.width = width
-        self.height = height
         self.line_thickness = line_thickness
         self.node_thickness = node_thickness
         self.font = font

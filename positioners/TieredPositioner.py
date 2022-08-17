@@ -7,11 +7,15 @@ class TieredPositioner(Positioner):
     """Organizes a graph into dependency layers, and positions its nodes so the layers are stacked.
     'Dependency layers' are groups of nodes which depend only on the nodes in previous layers."""
 
-    layers: list[list[Node]] = []
+    offset: tuple[int, int]   # How much space to put between nodes and the edge of the surface
+    spacing: tuple[int, int]  # How much space to put between nodes
+    layers: list[list[Node]]  # The dependency layers, useful for subclasses
 
     def __init__(self, offset: tuple[int, int], spacing: tuple[int, int]):
+        super().__init__()
         self.offset = offset
         self.spacing = spacing
+        self.layers = []
 
     def place_graph(self, graph: Graph) -> tuple[int, int]:
         self.layers = self.sort_layers(graph.nodes)

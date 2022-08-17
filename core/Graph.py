@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TextIO
 
 from core.Node import Node
-from core.Colours import parse_colour
+from core.Colours import Colour, parse_colour
 
 import json
 import pygame
@@ -11,10 +11,12 @@ import pygame
 class Graph:
     """Stores a set of nodes, and colour information (if loaded from a JSON file)"""
 
-    nodes: list[Node] = []
-    colours: dict[str, tuple[float, float, float]] = {}
+    nodes:   list[Node]         # List of nodes parsed from JSON file
+    colours: dict[str, Colour]  # Table of colours parsed from JSON file
 
     def __init__(self, file: str | TextIO, font: pygame.font.Font):
+        self.nodes = []
+        self.colours = {}
         if file:
             # Open file (supports file path, pointer, and JSON string)
             if file is TextIO:

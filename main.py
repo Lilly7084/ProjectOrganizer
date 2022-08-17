@@ -26,7 +26,7 @@ def main():
     # Create window
     max_width = 800
     max_height = 600
-    size = (min(r.width, max_width), min(r.height, max_height))
+    size = (min(width, max_width), min(height, max_height))
     screen = pygame.display.set_mode(size)
     clock = pygame.time.Clock()
 
@@ -69,8 +69,8 @@ def main():
                     scroll_x += scroll_speed
 
             # Scrolling constraint
-            scroll_x = min(max(scroll_x, 0), r.width - size[0])
-            scroll_y = min(max(scroll_y, 0), r.height - size[1])
+            scroll_x = min(max(scroll_x, 0), width - size[0])
+            scroll_y = min(max(scroll_y, 0), height - size[1])
 
 
 if __name__ == '__main__':
