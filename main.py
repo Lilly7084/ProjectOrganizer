@@ -16,7 +16,7 @@ def main():
     g = Graph('./projects.json', font)
 
     # Set node positions
-    rp = TieredPositioner(spacing=64)
+    rp = TieredPositioner(offset=(16, 16), spacing=(16, 48))
     width, height = rp.place_graph(g)
 
     # Render graph

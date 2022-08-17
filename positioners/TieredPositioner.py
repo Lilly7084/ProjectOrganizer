@@ -9,12 +9,26 @@ class TieredPositioner(Positioner):
 
     layers: list[list[Node]] = []
 
+    def __init__(self, offset: tuple[int, int], spacing: tuple[int, int]):
+        self.offset = offset
+        self.spacing = spacing
+
     def place_graph(self, graph: Graph) -> tuple[int, int]:
         self.layers = self.sort_layers(graph.nodes)
-        width = max(map(len, self.layers))
-        height = len(self.layers)
-        self.place_layers(self.layers, self.spacing)
-        return width * self.spacing, height * self.spacing
+        self.place_layers(self.layers, self.offset, self.spacing)
+
+        # Calculate positions
+        def layer_width(layer):
+            node = layer[-1]
+            return node.position_x + node.width / 2
+
+        def layer_height(layer):
+            return max(map(lambda n: (n.position_y + n.height / 2), layer))
+
+        width = max(map(layer_width, self.layers)) + self.offset[0]
+        height = layer_height(self.layers[-1]) + self.offset[1]
+
+        return width, height
 
     @staticmethod
     def sort_layers(nodes: list[Node]) -> list[list[Node]]:
@@ -39,9 +53,15 @@ class TieredPositioner(Positioner):
         return layers
 
     @staticmethod
-    def place_layers(layers: list[list[Node]], spacing: int) -> None:
+    def place_layers(layers: list[list[Node]], offset: tuple[int, int], spacing: tuple[int, int]) -> None:
         """Sets the node positions for a list of dependency layers"""
+        pos_y = offset[1]
         for (row, layer) in enumerate(layers):
+            pos_x = offset[0]
+            height = 0
             for (column, node) in enumerate(layer):
-                node.position_x = spacing * (column + 0.5)
-                node.position_y = spacing * (row + 0.5)
+                node.position_x = pos_x + node.width / 2
+                node.position_y = pos_y + node.height / 2
+                pos_x += node.width + spacing[0]
+                height = max(height, node.height)
+            pos_y += height + spacing[1]
