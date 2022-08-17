@@ -3,11 +3,11 @@ import textwrap
 
 
 def draw_text(text: str, line_width: int, font: pygame.font.Font,
-                dest: pygame.Surface | None, position: tuple[int, int]) -> pygame.Surface:
+              dest: pygame.Surface | None, position: tuple[int, int]) -> pygame.Surface:
     """Render multi-line text onto a PyGame surface"""
     lines = textwrap.wrap(text, line_width)
     text_color = (0, 0, 0)
-    surfaces = [font.render(l, False, text_color) for l in lines]
+    surfaces = [font.render(line, False, text_color) for line in lines]
 
     # Calculate combined size of surfaces
     text_width = 0
