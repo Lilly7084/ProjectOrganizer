@@ -9,15 +9,18 @@ import sys
 def main():
     pygame.init()
 
+    # Select font
+    font = pygame.font.SysFont('freesansbold.ttf', 24)
+
     # Import graph from JSON file
-    g = Graph('./projects.json')
+    g = Graph('./projects.json', font)
 
     # Set node positions
     rp = TieredPositioner(spacing=64)
     width, height = rp.place_graph(g)
 
     # Render graph
-    r = Renderer(width, height, line_thickness=1, node_thickness=1)
+    r = Renderer(width, height, 1, 1, font)
     r.render(g)
 
     # Create window

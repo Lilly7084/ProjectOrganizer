@@ -16,15 +16,15 @@ v0.1.0 (Initial test):
 
 v0.2.0 (Functionality):
 - [x] Positioner type: Dependency tiers
-- [ ] Show text contents of nodes
-- [ ] Resize nodes to perfectly fit text
+- [x] Show text contents of nodes
+- [x] Resize nodes to perfectly fit text
 - [x] Resize window to fit graph
+- [ ] Fix node spacing (between edges instead of centers)
 - [ ] Scroll preview window for large graphs
 - [x] Check projects for unsatisfied dependencies
 - [x] Export graph to PNG image
 
 v0.3.0 (Aesthetic):
-- [ ] Multiple node forms (ellipse, rectangle, ...)
 - [ ] Parse color information from JSON file
 - [ ] Show color code in rendered graphs
 - [ ] Use cubic curves (Hermite spline?) for dependency lines

@@ -5,12 +5,14 @@ import pygame
 
 class Renderer:
 
-    def __init__(self, width: int, height: int, line_thickness: int, node_thickness: int):
+    def __init__(self, width: int, height: int, line_thickness: int,
+                 node_thickness: int, font: pygame.font.Font):
         pygame.init()
         self.width = width
         self.height = height
         self.line_thickness = line_thickness
         self.node_thickness = node_thickness
+        self.font = font
         self.surface = pygame.Surface((width, height))
         self.surface.fill((255, 255, 255))
 
@@ -31,7 +33,7 @@ class Renderer:
 
         # Draw nodes
         for node in graph.nodes:
-            node.draw(self.surface, self.node_thickness)
+            node.draw(self.surface, self.font, self.node_thickness)
 
     def show(self, surface: pygame.Surface) -> None:
         """Blits the renderer surface onto another surface"""

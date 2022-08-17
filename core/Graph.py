@@ -4,6 +4,7 @@ from typing import TextIO
 from core.Node import Node
 
 import json
+import pygame
 
 
 class Graph:
@@ -12,7 +13,7 @@ class Graph:
     nodes: list[Node] = []
     metadata: dict = {}
 
-    def __init__(self, file: str | TextIO = None):
+    def __init__(self, file: str | TextIO, font: pygame.font.Font):
         if file:
             # Open file (supports file path, pointer, and JSON string)
             if file is TextIO:
@@ -22,18 +23,18 @@ class Graph:
             else:
                 data = json.load(open(file, 'r', encoding='utf-8'))
 
-            self.init_nodes(data['nodes'])
+            self.init_nodes(data['nodes'], font)
             self.metadata = data.copy()
             self.metadata.pop('nodes')
 
-    def init_nodes(self, data: dict) -> None:
+    def init_nodes(self, data: dict, font: pygame.font.Font) -> None:
         """Set up node and connection data from a dict (loaded from project-list JSON file)"""
 
         # Set up nodes
         for node_name, node in data.items():
             description = node['description'] if 'description' in node else ''
             status = node['status'] if 'status' in node else ''
-            n = Node(name=node_name, description=description, status=status)
+            n = Node(name=node_name, description=description, status=status, font=font)
             self.add_node(n)
 
         # Check node dependencies
