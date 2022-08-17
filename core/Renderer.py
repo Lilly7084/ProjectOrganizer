@@ -25,14 +25,8 @@ class Renderer:
         which can be blitted to the window surface once per frame."""
 
         # Draw connections
-        for node1 in graph.nodes:
-            point1 = (node1.position_x, node1.position_y)
-            for node2 in node1.dependants:
-                point2 = (node2.position_x, node2.position_y)
-
-                # TODO: Clean up connection drawing code
-                line_colour = (0, 0, 0)
-                pygame.draw.line(self.surface, line_colour, point1, point2, self.line_thickness)
+        for node in graph.nodes:
+            node.draw_connections(self.surface, self.line_thickness)
 
         # Draw nodes
         for node in graph.nodes:

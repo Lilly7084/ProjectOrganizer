@@ -63,6 +63,13 @@ class Node:
         pos_y = self.position_y - height / 2
         surface.blit(self.text_surf, (pos_x, pos_y))
 
+    def draw_connections(self, surface: pygame.Surface, line_thickness: int) -> None:
+        """Draws all connections between this node and its dependencies"""
+        point1 = (self.position_x, self.position_y + self.height / 2)
+        for node in self.dependants:
+            point2 = (node.position_x, node.position_y - node.height / 2)
+            pygame.draw.line(surface, self.colour, point1, point2, line_thickness)
+
     def is_dependency_satisfied(self) -> bool:
         """Check if all dependencies for this node have been completed"""
         return all((dep.status == 'completed') for dep in self.dependencies)
