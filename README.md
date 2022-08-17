@@ -1,4 +1,4 @@
-# ProjectOrganizer v0.1.7
+# ProjectOrganizer v0.2.1
 
 A custom project organizer with dependency checking.
 
@@ -24,12 +24,12 @@ v0.2.0 (Functionality):
 - [x] Resize nodes to perfectly fit text
 - [x] Resize window to fit graph
 - [x] Fix node spacing (between edges instead of centers)
-- [ ] Scroll preview window for large graphs
+- [x] Scroll preview window for large graphs
 - [x] Check projects for unsatisfied dependencies
 - [x] Export graph to PNG image
 
 v0.3.0 (Aesthetic):
-- [ ] Parse color information from JSON file
+- [x] Parse color information from JSON file
 - [ ] Show color code in rendered graphs
 - [ ] Use cubic curves (Hermite spline?) for dependency lines
 - [ ] Add arrow heads to the ends of lines
