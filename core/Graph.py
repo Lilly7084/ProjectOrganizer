@@ -24,8 +24,44 @@ class Graph:
                 data = json.load(open(file, 'r', encoding='utf-8'))
 
             self.init_nodes(data['nodes'], font)
+            self.colours = self.parse_colours(data["colours"])
             self.metadata = data.copy()
             self.metadata.pop('nodes')
+
+    def parse_colours(self, colours: dict) -> dict:
+
+        out = {}
+        for key, value in colours.items():
+            out[key] = self.parse_colour(value)
+        return out
+
+    def parse_colour(self, colour: str) -> tuple:
+        if colour in pygame.colordict.THECOLORS:
+            return pygame.colordict.THECOLORS[colour]
+        elif colour.lower().startswith("rgb("):
+            return self.from_rgb(colour)
+        elif colour.lower().startswith("hsv("):
+            return self.from_hsv(colour)
+        elif len(colour) in (6, 7):
+            return self.from_hex(colour)
+
+    @staticmethod
+    def from_rgb(colour: str) -> tuple:
+        as_str = colour[4:-1].split(",")
+        return tuple(int(i) for i in as_str)
+
+    @staticmethod
+    def from_hsv(colour: str) -> tuple:
+        as_str = colour[4:-1].split(",")
+        temp = pygame.Color((0, 0, 0))
+        temp.hsva = [int(i) for i in as_str]
+        return temp[0:3]
+
+    @staticmethod
+    def from_hex(colour: str) -> tuple:
+        if len(colour) == 7:
+            colour = colour[1:]
+        return int(colour[0:2], 16), int(colour[2:4], 16), int(colour[4:6], 16)
 
     def init_nodes(self, data: dict, font: pygame.font.Font) -> None:
         """Set up node and connection data from a dict (loaded from project-list JSON file)"""
