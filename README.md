@@ -7,6 +7,8 @@ their list (since they already had plenty of unfinished projects). The
 `projects.json` file, which currently contains an example project tree, has been
 preserved from their version, but the source code has been rebuilt from scratch.
 
+It is licensed under GPLv3.
+
 Here's an example of what it's outputting right now:
 
 ![](./test.png)
