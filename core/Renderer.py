@@ -38,7 +38,6 @@ class Renderer:
 
     def export(self, file_path: str) -> None:
         """Saves the contents of the renderer surface to an image"""
-        # TODO: Name hint 'jpg' might be expected to be 'jpeg'
         name_hint = file_path.split('.')[-1]
         with open(file_path, 'wb') as file_ptr:
             pygame.image.save(self.surface, file_ptr, name_hint)

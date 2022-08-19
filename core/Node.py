@@ -29,14 +29,12 @@ class Node:
         self.description = self.unescape(description)
         self.status = self.unescape(status)
         # Links
-        # TODO: Do we really need to store dependant nodes?
         self.dependencies = set()  # Nodes which 'self' has as dependencies
         self.dependants = set()  # Nodes which have 'self' as a dependency
 
     @staticmethod
     def unescape(s: str) -> str:
         s1 = s.encode('raw_unicode_escape').decode('unicode_escape')
-        # TODO: If more escapable characters come up, add them to this regex
         return re.sub(r'\\([+\-\'"])', lambda match: match.group(1), s1)
 
     def pre_render(self, font: pygame.font.Font, colours: dict[str, Colour]) -> None:

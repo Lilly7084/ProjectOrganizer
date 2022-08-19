@@ -54,12 +54,14 @@ class Graph:
                 node.status = 'missing deps'
             node.pre_render(font, colours)
 
-    def add_node(self, node: Node) -> None:
+    def add_node(self, node: Node) -> bool:
         """Adds a node to the graph's node-list"""
         if node not in self.nodes:
             self.nodes.append(node)
+            return True
+        return False
 
-    def remove_node(self, _node: str | Node) -> None:
+    def remove_node(self, _node: str | Node) -> bool:
         """Removes a node from the graph's node-list, severing any connections it has"""
         node = self.find_node(_node)
         if node:
@@ -68,25 +70,30 @@ class Graph:
                 self.remove_connection(node, node2)
             for node2 in node.dependants:
                 self.remove_connection(node2, node)
+            # Remove node
             self.nodes.remove(node)
+            return True
+        return False
 
-    def add_connection(self, _source: str | Node, _dest: str | Node) -> None:
+    def add_connection(self, _source: str | Node, _dest: str | Node) -> bool:
         """Creates a connection between 2 nodes in the graph's node-list"""
         source = self.find_node(_source)
         dest = self.find_node(_dest)
         if source and dest:
             source.dependencies.add(dest)
             dest.dependants.add(source)
-        # TODO: Warning message for failed connections?
+            return True
+        return False
 
-    def remove_connection(self, _source: str | Node, _dest: str | Node) -> None:
+    def remove_connection(self, _source: str | Node, _dest: str | Node) -> bool:
         """Removes a connection between 2 nodes in the graph's node-list"""
         source = self.find_node(_source)
         dest = self.find_node(_dest)
         if source and dest:
-            # TODO: Check for dangling / half connections?
             source.dependencies.remove(dest)
             dest.dependants.remove(source)
+            return True
+        return False
 
     def find_node(self, node: str | Node) -> Node | None:
         """Convenience function for managing nodes by name.
