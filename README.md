@@ -11,7 +11,7 @@ It is licensed under GPLv3.
 
 Here's an example of what it's outputting right now:
 
-![](./test.png)
+![test graph output](./test.png)
 
 ## To-do list
 
@@ -55,8 +55,6 @@ v0.5.0 (Usability):
 _Coming soon! For now, use the `projects.json` file as a reference._
 
 ## Color code
-
-_Not actually working yet! Will be added for v0.3.0._
 
 To make it more clear what can and can't be done at any given time, projects are
 usually color-coded. The color code can be defined on a per-project basis, and
