@@ -4,6 +4,7 @@ from core import DrawingUtils
 from core.Colours import Colour
 
 import pygame
+import re
 
 
 class Node:
@@ -34,8 +35,9 @@ class Node:
 
     @staticmethod
     def unescape(s: str) -> str:
-        # Source: https://thewebdev.info/2022/04/14/how-to-un-escape-a-backslash-escaped-string-with-python/
-        return s.encode('raw_unicode_escape').decode('unicode_escape')
+        s1 = s.encode('raw_unicode_escape').decode('unicode_escape')
+        # TODO: If more escapable characters come up, add them to this regex
+        return re.sub(r'\\([+\-\'"])', lambda match: match.group(1), s1)
 
     def pre_render(self, font: pygame.font.Font, colours: dict[str, Colour]) -> None:
         """Rendering stage 1: Sets up the node to be drawn to a surface"""
