@@ -39,7 +39,7 @@ v0.3.0 (Aesthetic):
 v0.4.0 (Legibility):
 - [ ] Positioner type: Reduce crossing lines
 - [ ] Positioner type: Reduce connection lengths
-- [ ] Export graph to SVG image
+- [x] Export graph to SVG image
 - [ ] Place connections evenly spaced on node's edges
 - [ ] Alternate line routing: Clearance/avoidance
 

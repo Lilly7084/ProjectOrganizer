@@ -41,3 +41,8 @@ class Renderer:
         name_hint = file_path.split('.')[-1]
         with open(file_path, 'wb') as file_ptr:
             pygame.image.save(self.surface, file_ptr, name_hint)
+
+    def export_svg(self, file_path: str, graph: Graph, text_size: int, invert=False, background=True) -> None:
+        from SVG import SVGExporter
+        exporter = SVGExporter(self.node_thickness, self.line_thickness, text_size, invert, background)
+        open(file_path, "w").write(exporter.get_xml(graph, self.surface.get_width(), self.surface.get_height()))
