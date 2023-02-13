@@ -8,14 +8,14 @@ def main():
     if len(sys.argv) != 2:
         print(f"Syntax: {sys.argv[0]} <projects.json file>")
         return
-    
+
     with open(sys.argv[1], 'r') as file_ptr:
         file_data = json.load(file_ptr)
         c1 = file_data.get('colors', {})
         c2 = file_data.get('colours', {})
         colours = {**c1, **c2}
         nodes_raw = file_data['nodes']
-    
+
     # Convert data to node-list and edge-list
     nodes = []
     name_to_index = {}
@@ -40,7 +40,7 @@ def main():
     for start, end in edges:
         if nodes[start]['status'] != 'completed':
             nodes[end]['status'] = 'missing deps'
-    
+
     result = ""  # Buffer to hold generated D2 code
 
     # Add edges to output code
@@ -56,7 +56,11 @@ def main():
         result += f"{num}.style.stroke-width: 8\n"
     result += "\n"
 
-    pipe = subprocess.Popen(['d2', '-l', 'elk', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    pipe = subprocess.Popen(
+        ['d2', '-l', 'elk', '-'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
     out = pipe.communicate(input=result.encode('utf-8'))[0]
 
     out_path = sys.argv[1].replace('.json', '.svg')
