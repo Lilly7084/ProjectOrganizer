@@ -1,4 +1,4 @@
-# ProjectOrganizer v0.2.1
+# ProjectOrganizer v1.0
 
 A visual project organizer with dependency checking.
 
