@@ -1,54 +1,23 @@
 # ProjectOrganizer v0.2.1
 
-A custom project organizer with dependency checking.
+A visual project organizer with dependency checking.
 
-This project was started by a friend (@GenericNerdyUsername), but I decided to take it from
-their list (since they already had plenty of unfinished projects). The
-`projects.json` file, which currently contains an example project tree, has been
-preserved from their version, but the source code has been rebuilt from scratch.
+**UPDATE**: Since the approach we were trying in 2022 wasn't working (too much
+graph theory, etc.), we ripped up the entire code base and replaced it with an
+almost absurdly simple, single-file solution built around the
+[D2 diagram scripting language](https://github.com/terrastruct/d2).
+
+This project was started by a friend (@GenericNerdyUsername), but I decided to
+take it from their list (since they already had plenty of unfinished projects).
+The `projects.json` file, which currently contains an example project tree, has
+been preserved from their version, but the source code has been rebuilt from
+scratch.
 
 It is licensed under GPLv3.
 
 Here's an example of what it's outputting right now:
 
-![test graph output](./test.png)
-
-## To-do list
-
-v0.1.0 (Initial test):
-- [x] Import a graph from a JSON file
-- [x] Positioner type: Random object placement
-- [x] Draw a graph to a PyGame window
-
-v0.2.0 (Functionality):
-- [x] Positioner type: Dependency tiers
-- [x] Show text contents of nodes
-- [x] Resize nodes to perfectly fit text
-- [x] Resize window to fit graph
-- [x] Fix node spacing (between edges instead of centers)
-- [x] Scroll preview window for large graphs
-- [x] Check projects for unsatisfied dependencies
-- [x] Export graph to PNG image
-
-v0.3.0 (Aesthetic):
-- [x] Parse color information from JSON file
-- [x] Show color code in rendered graphs
-- [ ] Use cubic curves (Hermite spline?) for dependency lines
-- [ ] Add arrow heads to the ends of lines
-
-v0.4.0 (Legibility):
-- [ ] Positioner type: Reduce crossing lines
-- [ ] Positioner type: Reduce connection lengths
-- [x] Export graph to SVG image
-- [ ] Place connections evenly spaced on node's edges
-- [ ] Alternate line routing: Clearance/avoidance
-
-v0.5.0 (Usability):
-- [ ] Add a command line interface
-- [ ] Add a graphical interface to the preview window
-- [ ] Add strings file to prepare for translation
-- [ ] Create icon files (vector image and 128x128)
-- [ ] Release as a portable executable
+![test graph output](./test.svg)
 
 ## Project-list format
 
@@ -71,10 +40,13 @@ can be whatever you want, but will default to:
 | missing deps[1] | Gray   | Can't start due to missing dependencies          |
 | default         | Black  | (No specific meaning)                            |
 
-[1] This tag is never assigned to an item. Rather, it's automatically assigned
-    to any project with at least one unsatisfied (incomplete) dependency.
+[1] This tag doesn't need to be assigned manually; the script will automatically
+    check every dependency of a project, and assign the tag as necessary. It can
+    still be set on its own, to mark dependency-related issues which aren't the
+    result of other projects not being completed.
 
 ## How to run
 
-It's quite simple, just run `python main.py <path>`, providing a path to a
-JSON file describing your current project list.
+It's quite simple, just run `/path/to/proj_org.py <path>`, providing a path to a
+JSON file describing your current project list. If the script has been marked as
+executable (`chmod +x`), you don't even need to add a `python3` at the start.
